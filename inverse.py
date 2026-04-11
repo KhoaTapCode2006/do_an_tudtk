@@ -19,6 +19,11 @@ def inverse(self, A):
 
         # khử Gauss đưa về dạng tam giác trên U
         U, y, _ = ge.gaussian_eliminate(A, e_j)
+        if j == 0:
+            for k in range(n):
+                # Sử dụng hằng số Zero từ class Matrix của đồng đội để tránh sai số dấu phẩy động
+                if abs(U[k][k]) <= mt.Matrix.Zero:
+                    raise ValueError("Can't find inverse of singular matrix")
         
         # thế ngược tìm vector cột x của ma trận nghịch đảo
         x = bs.back_substitution(self, U, y)
