@@ -5,38 +5,33 @@ def inverse(self, A):
     """ Tìm ma trận nghịch đảo bằng phương pháp Gauss-Jordan trên ma trận mở rộng [A | I] """
     n = len(A)
     if n == 0:
-        raise ValueError("Matrix is empty")
+        raise ValueError("Ma trận không được để trống")
     if n != len(A[0]):
-        raise ValueError("The matrix is not a square one")
+        raise ValueError("ma trận phải là ma trận vuông")
     
     # tạo ma trận mở rộng [A|I]
     aug = [row[:] + [1.0 if i == j else 0.0 for j in range(n)] for i, row in enumerate(A)]
 
-    for col in range(n):
-        # tìm hàng chứa pivot lớn nhất
-        max_row = col
-        for i in range(col + 1, n):
-            if abs(aug[i][col]) > abs(aug[max_row][col]):
-                max_row = i
+    ref_matrix, _, _ = ge.gaussian_eliminate(aug)
+
+    # Duyệt từ dòng cuối lên dòng đầu
+    for i in range(n - 1, -1, -1):
+        # Phần tử chốt 
+        pivot = ref_matrix[i][i]
         
-        # kiểm tra ma trận suy biến
-        if abs(aug[max_row][col]) <= mt.Matrix.Zero:
-            raise ValueError("Can't find inverse of singular matrix")
+        # Kiểm tra tính khả nghịch bằng mt.Matrix.Zero 
+        if abs(pivot) < mt.Matrix.Zero:
+            raise ValueError("Ma trận suy biến, không thể tìm ma trận nghịch đảo.")
 
-        # hoán đổi hàng hiện tại với hàng có pivot lớn nhất
-        aug[col], aug[max_row] = aug[max_row], aug[col]
+        # Chia dòng i cho pivot để phần tử chốt bằng 1
+        for j in range(i, 2 * n):
+            ref_matrix[i][j] /= pivot
 
-        # chia cả hàng cho phần tử đường chéo để nó biến thành số 1
-        pivot = aug[col][col]
-        for j in range(col, 2 * n):
-            aug[col][j] /= pivot
+        # Khử tất cả các phần tử phía trên phần tử chốt về 0
+        for k in range(i - 1, -1, -1):
+            factor = ref_matrix[k][i]
+            for j in range(i, 2 * n):
+                ref_matrix[k][j] -= factor * ref_matrix[i][j]
 
-        # biến tất cả các số KHÁC (trên và dưới) thành số 0
-        for i in range(n):
-            if i != col:
-                factor = aug[i][col]
-                for j in range(col, 2 * n):
-                    aug[i][j] -= factor * aug[col][j]
-
-    # lấy nửa bên phải, tức inverse của A
-    return [row[n:] for row in aug]
+    # Lấy nửa bên phải của ma trận RREF (A^-1)
+    return [row[n:] for row in ref_matrix]
