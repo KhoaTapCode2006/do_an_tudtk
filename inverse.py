@@ -1,30 +1,37 @@
 import matrix as mt
 import gaussian_eliminate as ge
-import back_substitution as bs
 
 def inverse(self, A): 
-    """ Tính ma trận nghịch đảo qua khử Gauss và thế ngược """
+    """ Tìm ma trận nghịch đảo bằng phương pháp Gauss-Jordan trên ma trận mở rộng [A | I] """
     n = len(A)
-
-    # chỉ xử lý ma trận vuông
-    if n == 0 or n != len(A[0]):
-        raise ValueError("The matrix is not a square one")
+    if n == 0:
+        raise ValueError("Ma trận không được để trống")
+    if n != len(A[0]):
+        raise ValueError("ma trận phải là ma trận vuông")
     
-    # khởi tạo ma trận rỗng n x n
-    inverseOfA = [[0.0 for _ in range(n)] for _ in range(n)]
+    # tạo ma trận mở rộng [A|I]
+    aug = [row[:] + [1.0 if i == j else 0.0 for j in range(n)] for i, row in enumerate(A)]
 
-    for j in range(n):
-        # tạo cột thứ j của ma trận đơn vị
-        e_j = [1.0 if i == j else 0.0 for i in range(n)]
+    ref_matrix, _, _ = ge.gaussian_eliminate(aug)
 
-        # khử Gauss đưa về dạng tam giác trên U
-        U, y, _ = ge.gaussian_eliminate(A, e_j)
+    # Duyệt từ dòng cuối lên dòng đầu
+    for i in range(n - 1, -1, -1):
+        # Phần tử chốt 
+        pivot = ref_matrix[i][i]
         
-        # thế ngược tìm vector cột x của ma trận nghịch đảo
-        x = bs.back_substitution(self, U, y)
+        # Kiểm tra tính khả nghịch bằng mt.Matrix.Zero 
+        if abs(pivot) < mt.Matrix.Zero:
+            raise ValueError("Ma trận suy biến, không thể tìm ma trận nghịch đảo.")
 
-        # thêm vector nghiệm vào cột tương ứng của kết quả
-        for i in range(n):
-            inverseOfA[i][j] = x[i]
+        # Chia dòng i cho pivot để phần tử chốt bằng 1
+        for j in range(i, 2 * n):
+            ref_matrix[i][j] /= pivot
 
-    return inverseOfA
+        # Khử tất cả các phần tử phía trên phần tử chốt về 0
+        for k in range(i - 1, -1, -1):
+            factor = ref_matrix[k][i]
+            for j in range(i, 2 * n):
+                ref_matrix[k][j] -= factor * ref_matrix[i][j]
+
+    # Lấy nửa bên phải của ma trận RREF (A^-1)
+    return [row[n:] for row in ref_matrix]

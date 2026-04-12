@@ -1,5 +1,6 @@
 class Matrix:
     Zero = 1e-10
+    
     def __init__(self, matrix, b=None):
         self.A = [list(map(float, row)) for row in matrix]
         self.n = len(self.A)
@@ -14,9 +15,8 @@ class Matrix:
     def copyMatrix(mat):
         return [row[:] for row in mat]
 
-    @staticmethod
-    def display(self, mat, title="Ma trận"):
-        for row in mat:
+    def display(self, mat=None, title="Ma trận"):
+        print(f"--- {title} ---")
+        target = mat if mat is not None else self.A
+        for row in target:
             print([round(x, 4) for x in row])
-                     
-            
