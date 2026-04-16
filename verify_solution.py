@@ -261,16 +261,15 @@ def verify_solutions():
             f.write(f"\n[Test Case] {case['name']}\n")
             log_input_data(f, case["A"])
             try:
-                # my_det = dt.determinant(A.copy())
-                my_det = np.linalg.det(A) # Giả lập code chạy đúng
+                resultDet = dt.determinant(A.copy().tolist())
 
                 np_det = np.linalg.det(A)
                 # Xử lý sai số float với số 0
                 if np.isclose(np_det, 0): np_det = 0.0
 
-                f.write(f"  + Output của bạn: {my_det}\n")
+                f.write(f"  + Output của bạn: {resultDet}\n")
 
-                if np.isclose(my_det, np_det, atol=1e-9):
+                if np.isclose(resultDet, np_det, atol=1e-9):
                     f.write("  => TRẠNG THÁI: [ ĐÚNG ]\n")
                 else:
                     f.write("  => TRẠNG THÁI: [ SAI ]\n")
