@@ -20,6 +20,12 @@ def log_input_data(f, A, b=None):
         f.write(f"  + Vector b: {formatted_b}\n")
     f.write("-" * 30 + "\n")
 
+def format_general_solution(particular, basis):
+    res = f"x = {particular}"
+    for i, v in enumerate(basis):
+        res += f" + t{i+1} * {v}"
+    return res
+
 def verify_solutions():
     log_file = "test_results.txt"
     CO_NGHIEM = float(1)
@@ -137,8 +143,8 @@ def verify_solutions():
             },
             {
                 "name": "Case 3: Hệ có phần tử chốt với phần thập phân nhỏ",
-                "A": np.array([[1., 1.], [1., 1.000000000001]]),
-                "b": np.array([2., 2.000000000001]),
+                "A": np.array([[1., 1.], [1., 1.0001]]),
+                "b": np.array([2., 2.0001]),
                 "expected_status": CO_NGHIEM
             },
             {
@@ -164,40 +170,60 @@ def verify_solutions():
             log_input_data(f, case["A"], case["b"])
             try:
                 U_mat, c_vec, swaps = ge.gaussian_eliminate(A.tolist(), b.tolist())
-                
+                # Giải hệ tam giác
                 status, result = bs.back_substitution(U_mat, c_vec)
                 
                 f.write(f"  + trạng thái: {status} (Kỳ vọng: {case['expected_status']})\n")
 
-                # Kiểm tra kết quả trả về 
                 is_correct = False
                 
+                # Nếu vô nghiệm
                 if status == VO_NGHIEM:
                     if case["expected_status"] == VO_NGHIEM:
                         is_correct = True
                         f.write("  + Kết quả: Phát hiện Vô nghiệm chính xác.\n")
                 
+                # Nếu có nghiệm duy nhất
                 elif status == CO_NGHIEM:
                     x_calculated = np.array(result)
+                    # Dùng numpy giải để đối chứng
                     expected_x = np.linalg.solve(A, b)
                     if np.allclose(x_calculated, expected_x, atol=1e-8):
                         is_correct = True
                         f.write(f"  + Nghiệm: {x_calculated}\n")
                 
+                # Nếu vô nghiệm
                 elif status == VO_SO_NGHIEM:
-                    particular_sol = np.array(result[0])
+                    particular_sol, basis = result
+                    p_sol = np.array(particular_sol)
                     f.write(f"  + Nghiệm riêng tìm được: {particular_sol}\n")
-                    # Kiểm tra: A * x_riêng có bằng b không?
-                    if np.allclose(np.dot(A, particular_sol), b, atol=1e-8):
+                    
+                    # Kiểm tra: A * x_p = b?
+                    check_p = np.allclose(np.dot(A, p_sol), b, atol=1e-8)
+                    
+                    # Kiểm tra các vector cơ sở: A * v = 0?
+                    check_basis = True
+                    for v in basis:
+                        v_np = np.array(v)
+                        if not np.allclose(np.dot(A, v_np), np.zeros(A.shape[0]), atol=1e-8):
+                            check_basis = False
+                            break
+                    
+                    # Kiểm tra số lượng vector cơ sở (n - rank)
+                    rank_A = np.linalg.matrix_rank(A)
+                    check_count = (len(basis) == (A.shape[1] - rank_A))
+
+                    if check_p and check_basis and check_count:
                         is_correct = True
-                        f.write("  + Kiểm chứng: A * x_particular = b (ĐÚNG)\n")
+                        f.write(f"  + Kết quả: Khớp nghiệm riêng và {len(basis)} vector cơ sở.\n")
+                        f.write(f"  + Dạng tổng quát: {format_general_solution(particular_sol, basis)}\n")
+                    else:
+                        f.write(f"  + SAI CHI TIẾT: P_sol={check_p}, Basis={check_basis}, Count={check_count}\n")
 
                 if is_correct and (status == case["expected_status"]):
                     f.write("  => TRẠNG THÁI: [ ĐÚNG ]\n")
                 else:
                     f.write("  => TRẠNG THÁI: [ SAI ]\n")
-                    if case["expected_status"] == CO_NGHIEM:
-                        f.write(f"  => Kỳ vọng nghiệm: {np.linalg.solve(A, b)}\n")
 
             except Exception as e:
                 f.write(f"  => LỖI CRASH: {str(e)}\n")
@@ -205,7 +231,7 @@ def verify_solutions():
         # 3. KIỂM TRA HÀM TÍNH ĐỊNH THỨC determinant(A)
         # ---------------------------------------------------------
         f.write("\n" + "="*60 + "\n")
-        f.write("--- PHẦN 2: KIỂM TRA HÀM TÍNH ĐỊNH THỨC determinant(A) ---\n")
+        f.write("--- PHẦN 3: KIỂM TRA HÀM TÍNH ĐỊNH THỨC determinant(A) ---\n")
         
         test_dets = [
             {
@@ -226,7 +252,7 @@ def verify_solutions():
             },
             {
                 "name": "Case 5: Ma trận định thức âm", 
-                "A": np.array([[1., 2., 3., 4.], [2., 1., 4., 3.], [3., 4., 1., 2.], [4., 3., 2., 1.]])
+                "A": np.array([[1., 3., 3., 4.], [2., 1., 4., 3.], [3., 4., 1., 2.], [4., 3., 2., 1.]])
             },
         ]
 

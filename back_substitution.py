@@ -57,5 +57,19 @@ def back_substitution(U, c):
         return 1, solve_system(c, [])
 
     # Vô số nghiệm
-
-    return -1, None
+    if free_vars:
+        # Gán tất cả biến tự do = 0
+        particular_sol = solve_system(c, [0.0] * len(free_vars))
+        
+        # Hệ nghiệm cơ sở (Null space basis)
+        basis = []
+        for i in range(len(free_vars)):
+            # Tạo vector trị tự do: biến thứ i là 1.0, còn lại là 0.0
+            free_values = [0.0] * len(free_vars)
+        free_values[i] = 1.0
+        # Giải Ux = 0 
+        zero_vec = [0.0] * n_rows
+        vec_basis = solve_system(zero_vec, free_values)
+        basis.append(vec_basis)
+        
+    return -1, (particular_sol, basis)

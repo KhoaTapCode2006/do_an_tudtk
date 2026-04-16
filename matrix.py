@@ -1,5 +1,5 @@
 class Matrix:
-    Zero = 1e-10
+    Zero = 1e-15
     
     def __init__(self, matrix, b=None):
         self.A = [list(map(float, row)) for row in matrix]

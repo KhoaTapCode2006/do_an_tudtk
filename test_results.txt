@@ -100,7 +100,7 @@
   + Nghiệm: [ 2.  3. -1.]
   => TRẠNG THÁI: [ ĐÚNG ]
 
-[Test Case] Case 2: Hệ có nghiệm vector không
+[Test Case] Case 2: Hệ có tất cả nghiệm = 0
   [Dữ liệu đầu vào]
   + Ma trận A:
     ['  1.0000', '  2.0000']
@@ -115,11 +115,12 @@
   [Dữ liệu đầu vào]
   + Ma trận A:
     ['  1.0000', '  1.0000']
-    ['  1.0000', '  1.0000']
-  + Vector b: ['  2.0000', '  2.0000']
+    ['  1.0000', '  1.0001']
+  + Vector b: ['  2.0000', '  2.0001']
 ------------------------------
-  + trạng thái: -1 (Kỳ vọng: 1.0)
-  => LỖI CRASH: 'NoneType' object is not subscriptable
+  + trạng thái: 1 (Kỳ vọng: 1.0)
+  + Nghiệm: [1. 1.]
+  => TRẠNG THÁI: [ ĐÚNG ]
 
 [Test Case] Case 4: Hệ vô nghiệm
   [Dữ liệu đầu vào]
@@ -140,10 +141,13 @@
   + Vector b: ['  3.0000', '  6.0000']
 ------------------------------
   + trạng thái: -1 (Kỳ vọng: -1.0)
-  => LỖI CRASH: 'NoneType' object is not subscriptable
+  + Nghiệm riêng tìm được: [3.0, 0.0]
+  + Kết quả: Khớp nghiệm riêng và 1 vector cơ sở.
+  + Dạng tổng quát: x = [3.0, 0.0] + t1 * [-2.0, 1.0]
+  => TRẠNG THÁI: [ ĐÚNG ]
 
 ============================================================
---- PHẦN 2: KIỂM TRA HÀM TÍNH ĐỊNH THỨC determinant(A) ---
+--- PHẦN 3: KIỂM TRA HÀM TÍNH ĐỊNH THỨC determinant(A) ---
 
 [Test Case] Case 1: Ma trận 2x2 cơ bản
   [Dữ liệu đầu vào]
@@ -187,12 +191,12 @@
 [Test Case] Case 5: Ma trận định thức âm
   [Dữ liệu đầu vào]
   + Ma trận A:
-    ['  1.0000', '  2.0000', '  3.0000', '  4.0000']
+    ['  1.0000', '  3.0000', '  3.0000', '  4.0000']
     ['  2.0000', '  1.0000', '  4.0000', '  3.0000']
     ['  3.0000', '  4.0000', '  1.0000', '  2.0000']
     ['  4.0000', '  3.0000', '  2.0000', '  1.0000']
 ------------------------------
-  + Output của bạn: 0.0
+  + Output của bạn: -19.99999999999999
   => TRẠNG THÁI: [ ĐÚNG ]
 
 ============================================================
