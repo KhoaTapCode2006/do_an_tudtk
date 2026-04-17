@@ -1,12 +1,12 @@
 import numpy as np
 from scipy import linalg
 import traceback
-import gaussian_eliminate as ge
-import back_substitution as bs
-import determinant as dt
-import inverse as inv
-import rank_and_basis as rb
-import matrix as mt
+import part1.gaussian_eliminate as ge
+import part1.back_substitution as bs
+import part1.determinant as dt
+import part1.inverse as inv
+import part1.rank_and_basis as rb
+import part1.matrix as mt
 
 # Hàm bổ trợ để ghi input
 def log_input_data(f, A, b=None):

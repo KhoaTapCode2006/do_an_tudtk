@@ -1,5 +1,5 @@
-import matrix as mt
-import gaussian_eliminate as ge
+import part1.matrix as mt
+import part1.gaussian_eliminate as ge
 
 def determinant(A):
     # Kiểm tra ma trận vuông

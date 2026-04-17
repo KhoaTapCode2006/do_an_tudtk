@@ -1,5 +1,5 @@
-import matrix as mt
-import gaussian_eliminate as ge
+import part1.matrix as mt
+import part1.gaussian_eliminate as ge
 
 def inverse(A): 
     """ Tìm ma trận nghịch đảo bằng phương pháp Gauss-Jordan trên ma trận mở rộng [A | I] """

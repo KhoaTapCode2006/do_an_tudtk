@@ -1,4 +1,4 @@
-import matrix as mt
+import part1.matrix as mt
 
 def gaussian_eliminate(A, b=None):
     if not A or not A[0]:
