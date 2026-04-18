@@ -63,7 +63,7 @@ class SVDDecomposition:
                 V[i][p] = c * vip - s * viq
                 V[i][q] = s * vip + c * viq
 
-                # S (chỉ cập nhật các dòng/cột không phải p, q ở bước này)
+                # Cập nhật các dòng trong S
                 if i != p and i != q:
                     sip = S_copy[i][p]
                     siq = S_copy[i][q]
@@ -98,18 +98,18 @@ class SVDDecomposition:
         n = len(A[0])
 
         tol = 1e-9
-        # 1. Tính A_T * A (kích thước n x n)
+        # Tính A_T * A 
         A_T = SVDDecomposition.transpose(A)
         ATA = SVDDecomposition.matmul(A_T, A)
 
-        # 2. Tìm trị riêng và vector riêng của ATA
+        # Tìm trị riêng và vector riêng của ATA
         # eigenvalues: n phần tử, V: n x n
         eigenvalues, V = SVDDecomposition.jacobi_eigen(ATA)
 
         # Sắp xếp trị riêng và vector riêng theo thứ tự giảm dần của trị riêng
         eigen_pairs = []
         for i in range(len(eigenvalues)):
-            # Đảm bảo lấy trị tuyệt đối để tránh lỗi số âm cực nhỏ (ví dụ -1e-15)
+            # Lấy trị tuyệt đối để tránh lỗi số âm cực nhỏ 
             val = max(0, eigenvalues[i])
             # V là ma trận mà các cột là vector riêng
             col = [V[row][i] for row in range(len(V))]
@@ -120,7 +120,7 @@ class SVDDecomposition:
         sorted_eigenvalues = [p[0] for p in eigen_pairs]
         sorted_V_cols = [p[1] for p in eigen_pairs]
 
-        # Khởi tạo Sigma (m x n) và gán giá trị suy biến
+        # Khởi tạo Sigma và gán giá trị suy biến
         Sigma = [[0.0] * n for _ in range(m)]
         singular_values = []
         for i in range(min(m, n)):
@@ -128,28 +128,28 @@ class SVDDecomposition:
             Sigma[i][i] = val
             singular_values.append(val)
 
-        # 4. Tính ma trận U (m x m)
+        # Tính ma trận U (m x m)
         # Công thức: u_i = (1 / sigma_i) * A * v_i
         U_cols = []
         
         for i in range(min(m, n)):
             if singular_values[i] > tol:
-                # v_i là cột thứ i của V (dòng thứ i của V_T)
+                # v_i là cột thứ i của V 
                 v_i = sorted_V_cols[i]
-                # A * v_i (kết quả là vector m chiều)
+                # A * v_i 
                 u_i = [sum(A[r][c] * v_i[c] for c in range(n)) for r in range(m)]
                 # Chuẩn hóa u_i
                 norm = SVDDecomposition.vector_norm(u_i)
                 U_cols.append([x / norm for x in u_i])
 
-        # Nếu U chưa đủ m cột (ma trận không vuông hoặc suy biến), bổ sung bằng Gram-Schmidt
+        # Nếu U chưa đủ m cột, bổ sung bằng Gram-Schmidt
         basis_idx = 0
         while len(U_cols) < m:
             # Tạo vector cơ sở tiêu chuẩn e_i
             e = [0.0] * m
             e[basis_idx] = 1.0
 
-            # Trực giao hóa (Orthogonalize) với các cột đã có trong U
+            # Trực giao hóa với các cột đã có trong U
             temp_e = e[:]
             for u in U_cols:
                 dot = sum(temp_e[k] * u[k] for k in range(m))
@@ -159,7 +159,7 @@ class SVDDecomposition:
             norm = SVDDecomposition.vector_norm(temp_e)
 
             if norm > tol:
-                # Chuẩn hóa (Normalize)
+                # Chuẩn hóa 
                 U_cols.append([x / norm for x in temp_e])
             basis_idx += 1
 

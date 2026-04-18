@@ -4,7 +4,7 @@ import numpy as np # Dùng để kiểm thử kết quả
 class Diagonalization:
     @staticmethod
     def is_symmetric(A, tol=1e-9):
-        """Kiểm tra xem ma trận có phải là ma trận đối xứng không."""
+        """Kiểm tra ma trận đối xứng ."""
         n = len(A)
         for i in range(n):
             for j in range(i + 1, n):
@@ -16,8 +16,6 @@ class Diagonalization:
     def diagonalize(A):
         """
         Chéo hóa ma trận A: A = P * D * P^-1
-        Do sử dụng thuật toán Jacobi, A bắt buộc phải là ma trận vuông đối xứng.
-        Trả về P, D, P_inv.
         """
         if not A or not A[0]:
             raise ValueError("Ma trận A không được rỗng.")
