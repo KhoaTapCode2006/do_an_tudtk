@@ -48,7 +48,6 @@ class SVDTheory(Scene):
             return group
 
         # --- BƯỚC 1: Phân tích V^T ---
-        # Bổ sung thuật ngữ "Right singular vectors"
         details_V = create_detail_box([
             "Là ma trận trực giao (Orthogonal Matrix) kích thước $n \\times n$.",
             "Các cột của $V$ gọi là \\textbf{Vector suy biến phải} (Right singular vectors).",
@@ -64,7 +63,7 @@ class SVDTheory(Scene):
         self.play(FadeOut(details_V))
 
         # --- BƯỚC 2: Phân tích \Sigma ---
-        # Bổ sung mối liên hệ với Rank (Hạng ma trận)
+        # Bổ sung mối liên hệ với hạng ma trận
         details_S = create_detail_box([
             "Là ma trận đường chéo (Diagonal) kích thước $m \\times n$.",
             "Chứa các \\textbf{giá trị suy biến} $\\sigma_1 \\geq \\sigma_2 \\geq \\dots \\geq 0$.",
@@ -81,7 +80,6 @@ class SVDTheory(Scene):
         self.play(FadeOut(details_S))
 
         # --- BƯỚC 3: Phân tích U ---
-        # Bổ sung thuật ngữ "Left singular vectors"
         details_U = create_detail_box([
             "Là ma trận trực giao (Orthogonal Matrix) kích thước $m \\times m$.",
             "Các cột của $U$ gọi là \\textbf{Vector suy biến trái} (Left singular vectors).",
@@ -107,7 +105,6 @@ class SVDTheory(Scene):
         summary_text.next_to(formula, DOWN, buff=1)
         summary_box = SurroundingRectangle(summary_text, color=WHITE, buff=0.3)
 
-        # Thêm một note nhỏ về ứng dụng để tạo sự tò mò (Rất cần thiết trong video giáo dục)
         app_text = Tex(
             "* Ứng dụng: Bằng cách bỏ đi các $\\sigma_i$ nhỏ, ta có thể nén ảnh\\\\ hoặc giảm chiều dữ liệu (Truncated SVD / PCA).",
             tex_template=my_template,
@@ -207,7 +204,7 @@ class SVDGeometry(Scene):
         VT_mat = np.array(Vt_list)
         A_array = np.array(A_list)
         
-        # 4. KIỂM CHỨNG BẰNG NUMPY (CHỈ IN RA CONSOLE)
+        # 4. KIỂM CHỨNG BẰNG NUMPY 
         np_U, np_S, np_VT = np.linalg.svd(A_array)
         print("\n" + "="*50)
         print("KIỂM CHỨNG THUẬT TOÁN (GHI RA CONSOLE)")
@@ -442,10 +439,9 @@ class Diagonalization(Scene):
         self.play(FadeIn(v1_eq), FadeIn(v2_eq))
         self.wait(2)
 
-        # Chuyển cảnh: Xóa luôn Ma trận A và bước 1, bước 2 ở trên cùng để giải phóng toàn bộ không gian cho Bước 3
         self.play(FadeOut(eq_A), FadeOut(step1_group), FadeOut(step2_group))
 
-        # BƯỚC 3: LẮP RÁP THÀNH P, D, P^-1 (SỐNG ĐỘNG HƠN)
+        # BƯỚC 3: LẮP RÁP THÀNH P, D, P^-1 
         step3_title = Tex("Bước 3: Lập phân tích $A = P D P^{-1}$", tex_template=my_template, font_size=36, color=YELLOW)
         step3_title.next_to(title, DOWN, buff=0.5)
         self.play(Write(step3_title))
@@ -502,7 +498,7 @@ class Diagonalization(Scene):
         self.play(FadeIn(matrix_Pinv), FadeIn(lbl_Pinv))
         self.wait(1)
 
-        # Xóa mấy dòng ghi chú nhỏ ở dưới gầm ma trận để lấy không gian viết Cú chốt
+        # Xóa  ghi chú, lấy không gian viết kết luận
         self.play(FadeOut(note_P), FadeOut(note_D))
 
         connection_note = Tex(
@@ -527,11 +523,10 @@ class SVDConnection(Scene):
         self.play(Write(title))
 
         formula = MathTex("\\sigma_i = \\sqrt{\\lambda_i(A^T A)}", font_size=50, color=GREEN)
-        # Lệnh này ép công thức căn giữa tuyệt đối ngay dưới Tiêu đề
         formula.next_to(title, DOWN, buff=0.5) 
         
         formula_desc = Tex("Singular Value của $A$ bằng căn bậc hai Eigenvalue của $A^T A$", tex_template=my_template, font_size=32)
-        # Lệnh này ép dòng mô tả nằm ngay dưới công thức
+
         formula_desc.next_to(formula, DOWN, buff=0.3)
         
         self.play(FadeIn(formula), FadeIn(formula_desc))
@@ -590,10 +585,9 @@ class SVDConnection(Scene):
         self.play(Write(final_note))
         self.wait(3)
 
-        # Lệnh này sẽ xóa sạnh bóng quân thù (xóa hết các phép tính toán số học nãy giờ) để nhường chỗ cho NỬA DƯỚI
         self.play(FadeOut(VGroup(formula, formula_desc, eq_A, step1_text, eq_ATA, step2_text, eq_eig, res_eig, step3_text, res_svd, box, final_note)))
 
-        # Câu hỏi chuyển ý (Đã giảm buff xuống 0.3 để kéo nó lên cao hơn)
+        # Câu hỏi chuyển 
         q_text = Tex("Tại sao lại có sự trùng hợp này? Hãy cùng xem những gì xảy ra bên dưới:", tex_template=my_template, font_size=36, color=GREEN)
         q_text.next_to(title, DOWN, buff=0.3)
         self.play(Write(q_text))
@@ -607,7 +601,7 @@ class SVDConnection(Scene):
         # Bước 3: Phá ngoặc theo luật (ABC)^T = C^T B^T A^T
         eq3 = MathTex("A^T A = V \\Sigma^T U^T U \\Sigma V^T")
         
-        # Bước 4: Triệt tiêu U^T U vì U là ma trận trực giao (nhân nhau = ma trận đơn vị I)
+        # Bước 4: Triệt tiêu U^T U vì U là ma trận trực giao 
         eq4 = MathTex("A^T A = V \\Sigma^2 V^T")
         note4 = Tex("(vì $U$ trực giao nên $U^T U = I$)", tex_template=my_template, font_size=28, color=GRAY)
         group4 = VGroup(eq4, note4).arrange(RIGHT, buff=0.5) 
@@ -617,10 +611,8 @@ class SVDConnection(Scene):
         note5 = Tex("(vì $V$ trực giao nên $V^T = V^{-1}$)", tex_template=my_template, font_size=28, color=GRAY)
         group5 = VGroup(eq5, note5).arrange(RIGHT, buff=0.5)
 
-        # Đã thêm scale(0.9) và giảm buff xuống 0.3 để bóp gọn nguyên cụm công thức này lại
         proof_group = VGroup(eq1, eq2, eq3, group4, group5).arrange(DOWN, buff=0.3).scale(0.9).next_to(q_text, DOWN, buff=0.3)
 
-        # Chạy hiệu ứng cho nó hiện lên từng dòng một như cô giáo viết bảng
         self.play(FadeIn(eq1))
         self.wait(1)
         self.play(FadeIn(eq2))
@@ -640,17 +632,15 @@ class SVDConnection(Scene):
         )
         conclusion_box = SurroundingRectangle(conclusion_text, color=YELLOW, buff=0.2)
         
-        # Kéo nguyên cụm kết luận nhích lên trên một chút (buff=0.4) để tránh viền đen ở đáy video
         conclusion_group = VGroup(conclusion_text, conclusion_box).next_to(proof_group, DOWN, buff=0.4)
 
-        # Hiện cái khung kết luận màu vàng bự chà bá ở dưới cùng
         self.play(Write(conclusion_text), Create(conclusion_box))
         self.wait(5)
 
         # Xóa sạch màn hình trước khi end video
         self.play(FadeOut(Group(*self.mobjects)))
 
-# Phần 4:Ứng dung SVD để nén ảnh trong thực tế ( dung trực tiếpnp.linalg.svd của thư viện numpy )
+# Phần 4: Ứng dung SVD để nén ảnh trong thực tế ( dùng np.linalg.svd của thư viện numpy )
 class ImageCompression(Scene):
     def construct(self):
         title = Tex("Ứng dụng thực tế: Nén ảnh (Truncated SVD)", tex_template=my_template, font_size=40, color=YELLOW)
@@ -667,7 +657,7 @@ class ImageCompression(Scene):
             # Tính toán SVD cho toàn bộ ma trận ảnh gốc
             U, S, VT = np.linalg.svd(img_array, full_matrices=False)
             
-            # Hàm này chuyển một ma trận số học trở lại thành một tấm ảnh (ImageMobject) để hiển thị lên Manim
+            # Chuyển một ma trận số học trở lại thành một tấm ảnh để hiển thị lên Manim
             def get_image_mobject(matrix):
                 matrix = np.clip(matrix, 0, 255).astype(np.uint8) # Ép giá trị điểm ảnh vào khung an toàn [0, 255]
                 return ImageMobject(matrix).set_resampling_algorithm(RESAMPLING_ALGORITHMS["none"]).scale(2)
@@ -679,7 +669,7 @@ class ImageCompression(Scene):
             self.play(FadeIn(current_image), Write(img_label))
             self.wait(1)
 
-            # Hàm tự động tạo bảng thông tin (Dung lượng, số k, tỉ lệ %) ở bên phải màn hình tùy theo k
+            # Hàm tự động tạo bảng thông tin 
             def get_info_panel(k_val):
                 formula = Tex(f"$A_{{{k_val}}} \\approx U_{{{k_val}}} \\Sigma_{{{k_val}}} V_{{{k_val}}}^T$", font_size=40, color=BLUE)
                 
@@ -697,7 +687,7 @@ class ImageCompression(Scene):
                 
                 return VGroup(formula, stats).arrange(DOWN, buff=0.8).shift(RIGHT * 3.5)
 
-            # List chứa các mốc k (số lượng đặc trưng sẽ giữ lại)
+            # List chứa các mốc k 
             k_values = [5, 20, 50, 150]
             current_panel = get_info_panel(k_values[0])
             
@@ -711,7 +701,7 @@ class ImageCompression(Scene):
                 new_panel = get_info_panel(k)
 
                 if i == 0:
-                    # Lần đầu: Thay đổi từ ảnh Gốc sang ảnh k=5 (cực mờ)
+                    # Lần đầu: Thay đổi từ ảnh Gốc sang ảnh k=5 
                     self.play(
                         FadeTransform(current_image, new_image),
                         Transform(img_label, new_label),
@@ -719,7 +709,7 @@ class ImageCompression(Scene):
                         run_time=2
                     )
                 else:
-                    # Lần sau: Cập nhật hình mượt mà (Transform) từ k nhỏ sang k lớn
+                    # Lần sau: Tăng dần k lên
                     self.play(
                         FadeTransform(current_image, new_image),
                         Transform(img_label, new_label),
@@ -734,11 +724,10 @@ class ImageCompression(Scene):
             conclusion.next_to(current_panel, DOWN, buff=1)
             self.play(Write(conclusion))
             self.wait(3)
-            # Group dùng thay cho VGroup vì ảnh ImageMobject không phải là Vector
+            # Group dùng thay cho VGroup 
             self.play(FadeOut(Group(title, current_image, img_label, current_panel, conclusion)))
 
         except FileNotFoundError:
-            # Nếu người dùng quên bỏ file ảnh vào chung thư mục code thì sẽ hiện lỗi này
             error_msg = Tex("Lỗi: Không tìm thấy file 'Rose_BlackPink.jpg'.\\\\ Vui lòng để ảnh cùng thư mục với code.", tex_template=my_template, color=RED)
             self.play(Write(error_msg))
             self.wait(3)
@@ -750,7 +739,6 @@ class References(Scene):
         title = Tex("Tài Liệu Tham Khảo", tex_template=my_template, font_size=50, color=YELLOW)
         title.to_edge(UP, buff=1)
         
-        # Khai báo các tựa sách tham khảo theo định dạng chuẩn
         refs = VGroup(
             Tex("[1] TOÁN HỌC MUÔN NƠI. \\textit{Giới thiệu Manim | Intro Manim | Manim tutorial | ManimCE | Animation with Manim} (YouTube). 2024", tex_template=my_template, font_size=30),
             Tex("[2] Stochastic. \\textit{What is the Singular Value Decomposition?}. 2020", tex_template=my_template, font_size=30)
@@ -759,7 +747,7 @@ class References(Scene):
         refs.next_to(title, DOWN, buff=1)
 
         self.play(Write(title))
-        self.play(FadeIn(refs, shift=UP)) # Hiệu ứng vừa hiện vừa trượt từ dưới lên
+        self.play(FadeIn(refs, shift=UP))
         self.wait(4)
         
         thanks = Tex("Cảm ơn Thầy/Cô đã theo dõi!", tex_template=my_template, font_size=40, color=GREEN)
@@ -767,8 +755,6 @@ class References(Scene):
         self.play(Write(thanks))
         self.wait(3)
 
-
-# tui them nhung phan sau: intro, truc quan hoa diagonalization + so sanh
 
 # TỔNG KẾT SỰ KHÁC BIỆT 
 
@@ -807,7 +793,7 @@ class SummaryComparison(Scene):
 
         # --- HIỆU ỨNG HIỆN TỪNG BÊN THEO LỜI NÓI ---
 
-        # Giai đoạn 1: Nói về SVD (Hiện hết cột trái)
+        # Giai đoạn 1: Nói về SVD 
         self.play(FadeIn(svd_label), Write(svd_formula))
         self.wait(1)
         for point in svd_points:
@@ -816,7 +802,7 @@ class SummaryComparison(Scene):
 
         self.wait(2) # Nghỉ một nhịp trước khi sang Chéo hóa
 
-        # Giai đoạn 2: Nói về Chéo hóa (Hiện hết cột phải)
+        # Giai đoạn 2: Nói về Chéo hóa 
         self.play(FadeIn(diag_label), Write(diag_formula))
         self.wait(1)
         for point in diag_points:
@@ -825,7 +811,7 @@ class SummaryComparison(Scene):
 
         self.wait(2)
 
-        # 3. CHỐT HẠ KẾT LUẬN
+        # 3. KẾT LUẬN
         conclusion_text = Tex(
             "\\textbf{Kết luận: SVD là sự tổng quát hóa của Chéo hóa.}\\\\"
             "Nó giúp ta nhìn thấy cấu trúc thực sự của ma trận mà không cần quan tâm đến tính vuông góc hay đối xứng.",
@@ -857,12 +843,12 @@ class IntroScene(Scene):
         # Gom nhóm và căn lề dọc
         intro_group = VGroup(course_name, title, subtitle).arrange(DOWN, buff=0.5)
 
-        # Hiệu ứng hiện chữ (FadeIn mượt mà kết hợp Write)
+        # Hiệu ứng hiện chữ 
         self.play(FadeIn(course_name, shift=UP)) # Trượt nhẹ từ trên xuống
         self.wait(0.5)
         self.play(Write(title), run_time=1.5)    # Viết từng nét
         self.play(FadeIn(subtitle))
-        self.wait(1) # Dừng 3 giây để thầy cô kịp đọc
+        self.wait(1) 
 
         # Xóa sạch màn hình cực ngầu để chuyển cảnh sang phần Lý thuyết
         self.play(FadeOut(intro_group, shift=DOWN)) 
@@ -876,12 +862,12 @@ class SVDvsDiagAnimation(Scene):
         title.to_edge(UP, buff=0.15)
         self.play(Write(title))
 
-        # Ép tọa độ chết cho dòng trạng thái ở trên cùng (UP * 2.8)
+        # Ép tọa độ cho dòng trạng thái ở trên cùng 
         TEXT_POS = UP * 2.8
         status_text = Tex("Trạng thái: \\textbf{Không gian ban đầu ($x$)}", tex_template=my_template, font_size=30)
         status_text.move_to(TEXT_POS)
 
-        # 2. NHÃN HAI BÊN (Nâng cao lên UP * 2.1)
+        # 2. NHÃN HAI BÊN 
         label_svd = Tex("\\textbf{SVD} ($A = U \\Sigma V^T$)", tex_template=my_template, font_size=32, color=GREEN)
         label_svd.move_to(LEFT * 3.5 + UP * 2.1)
 
@@ -901,7 +887,7 @@ class SVDvsDiagAnimation(Scene):
         P_inv_mat = np.linalg.inv(P_mat)
         p1_diag, p2_diag = P_mat[:, 0], P_mat[:, 1]
 
-        # --- SETUP HÌNH HỌC BÊN TRÁI & PHẢI (Nâng lên UP * 0.2) ---
+        # --- SETUP HÌNH HỌC BÊN TRÁI & PHẢI  ---
         GRAPH_Y = 0.2
         
         # Nhóm SVD
@@ -955,7 +941,7 @@ class SVDvsDiagAnimation(Scene):
         new_mat_svd_1 = get_mat_mob("V^T =", VT_mat).move_to(LEFT * 3.5 + MAT_Y)
         new_mat_diag_1 = get_mat_mob("P^{-1} =", P_inv_mat).move_to(RIGHT * 3.5 + MAT_Y)
 
-        # Dùng ReplacementTransform để sửa dứt điểm lỗi chồng bóng chữ
+        # Dùng ReplacementTransform để sửa lỗi chồng bóng chữ
         self.play(
             ReplacementTransform(status_text, step1_text),
             ReplacementTransform(current_mat_svd, new_mat_svd_1),
