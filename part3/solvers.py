@@ -1,3 +1,10 @@
+import sys
+import os
+root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(root_dir)
+sys.path.append(os.path.join(root_dir, 'part1'))
+sys.path.append(os.path.join(root_dir, 'part2'))
+sys.path.append(os.path.join(root_dir, 'part3'))
 import math
 from part1 import matrix as mt
 from part1 import gaussian_eliminate as ge
@@ -25,7 +32,7 @@ class Solvers:
 
     def solve_svd(self):
         """Giải Ax = b bằng phân rã SVD"""
-        U, Sigma, V_T = dcp.svd(self.A)
+        U, Sigma, V_T = dcp.SVDDecomposition.svd(self.A)
     
         # Biến b thành ma trận cột
         b_col = [[x] for x in self.b]
@@ -35,8 +42,8 @@ class Solvers:
         # Do đó Ax = U * Sigma * V^T * x = b <=> x = V * Sigma_inv * U^T * b_col
 
         # Tính Ut_b = U^T * b_col
-        U_T = dcp.transpose(U)
-        Ut_b_mat = dcp.matmul(U_T, b_col)
+        U_T = dcp.SVDDecomposition.transpose(U)
+        Ut_b_mat = dcp.SVDDecomposition.matmul(U_T, b_col)
     
         # Nhân Ut_b với Sigma_inv
         # Lấy các giá trị trên đường chéo để tính s_inv
@@ -48,8 +55,8 @@ class Solvers:
             s_inv_Ut_b.append([val])
         
         # Bước 3: x = V * s_inv_Ut_b
-        V = dcp.transpose(V_T)
-        x_mat = dcp.matmul(V, s_inv_Ut_b)
+        V = dcp.SVDDecomposition.transpose(V_T)
+        x_mat = dcp.SVDDecomposition.matmul(V, s_inv_Ut_b)
     
         # Trả nghiệm về kết quả dạng vector
         x = [row[0] for row in x_mat]
@@ -122,10 +129,10 @@ class Solvers:
             diff_sq_sum = sum((x[i] - x_old[i])**2 for i in range(self.n))
             # Nếu khoảng cách này nhỏ hơn sai số cho phép, có nghĩa là các giá trị của x đã ổn định, xác nhận giải thành công.
             if math.sqrt(diff_sq_sum) < tol:
-                return U, x
+                return U, x, k + 1
             
         # Nghiệm chưa chắc đã chính xác, cần kiểm tra bằng phương pháp khác
-        return U, x
+        return U, x, max_iter
     
 if __name__ == "__main__":
     # Ma trận A chéo trội chặt để đảm bảo các phương pháp đều chạy tốt
