@@ -168,7 +168,7 @@ if __name__ == "__main__":
 
     # Kiểm tra Gauss-Seidel
     try:
-        U_gs, x_gs = solver.solve_gauss_seidel(tol=1e-9)
+        U_gs, x_gs, k_gs = solver.solve_gauss_seidel(tol=1e-9)
         print("\nPhương pháp lặp Gauss-Seidel:")
         print(f"   - Nghiệm x: {[round(val, 4) for val in x_gs]}")
         print(f"   - Ma trận U (Phần tam giác trên của A):\n     {U_gs[0]}\n     {U_gs[1]}\n     {U_gs[2]}")
