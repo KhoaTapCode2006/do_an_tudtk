@@ -49,7 +49,7 @@ def gaussian_eliminate(A, b=None):
             for j in range(col, m):
                 newMatrix[i][j] -= factor * newMatrix[row][j]
             
-            newMatrix[i][col] = mt.Matrix.Zero
+            newMatrix[i][col] = 0.0
             # Khử trên vector b
             if b_new is not None:
                 b_new[i] -= factor * b_new[row]
