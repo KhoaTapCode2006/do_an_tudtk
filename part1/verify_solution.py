@@ -1,5 +1,4 @@
 import numpy as np
-from scipy import linalg
 import traceback
 import gaussian_eliminate as ge
 import back_substitution as bs
