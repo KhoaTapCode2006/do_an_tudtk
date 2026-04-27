@@ -6,10 +6,10 @@ sys.path.append(os.path.join(root_dir, 'part1'))
 sys.path.append(os.path.join(root_dir, 'part2'))
 sys.path.append(os.path.join(root_dir, 'part3'))
 import math
-from part1 import matrix as mt
-from part1 import gaussian_eliminate as ge
-from part1 import back_substitution as bs
-from part2 import decomposition as dcp
+import part1.matrix as mt
+import part1.gaussian_eliminate as ge
+import part1.back_substitution as bs
+import part2.decomposition as dcp
 
 class Solvers:
     def __init__(self, matrix_obj):

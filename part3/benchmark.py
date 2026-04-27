@@ -22,13 +22,13 @@ def generate_type1_sdd_matrix(n):
     for i in range(n):
         row = [random.uniform(-10.0, 10.0) for _ in range(n)]
         off_diag_sum = sum(abs(x) for x in row) - abs(row[i])
-        # Ép đường chéo CHẮC CHẮN LỚN HƠN tổng các phần tử còn lại
+        # Làm phần tử đường chéo chắc chắn lớn hơn tổng các phần tử còn lại
         row[i] = (off_diag_sum + random.uniform(2.0, 10.0)) * (1 if random.random() > 0.5 else -1)
         A.append(row)
     return A
 
 def generate_type2_increasing_sdd(n):
-    """LOẠI 2: Ma trận chéo trội (Dành cho test kích thước tăng dần)"""
+    """LOẠI 2: Ma trận chéo trội """
     A = []
     for i in range(n):
         row = [random.uniform(-50.0, 50.0) for _ in range(n)] # Biên độ ngẫu nhiên lớn hơn
@@ -38,13 +38,13 @@ def generate_type2_increasing_sdd(n):
     return A
 
 def generate_type3_non_sdd_matrix(n):
-    """LOẠI 3: Ma trận cố tình KHÔNG chéo trội (Đảm bảo Gauss-Seidel thất bại)"""
+    """LOẠI 3: Ma trận không chéo trội """
     A = []
     for i in range(n):
         row = [random.uniform(-10.0, 10.0) for _ in range(n)]
         off_diag_sum = sum(abs(x) for x in row) - abs(row[i])
         
-        # CÚ LỪA: Ép phần tử đường chéo phải BÉ HƠN RẤT NHIỀU so với tổng phần tử còn lại
+        # Làm phần tử đường chéo chắc chắn bé hơn nhiều so với tổng phần tử còn lại
         if off_diag_sum > 0:
             row[i] = random.uniform(0.0, off_diag_sum * 0.1) * (1 if random.random() > 0.5 else -1)
         else:
@@ -68,7 +68,7 @@ def run_benchmark():
         print("\n\n")
         print(f"KÍCH THƯỚC MA TRẬN: {n} x {n}")
         print("\n")
-        # Chạy 5 test cases, phân bổ đều cho 3 LOẠI MA TRẬN
+
         for test_idx in range(1, 6):
             print(f"\nTest Case {test_idx}")
             
