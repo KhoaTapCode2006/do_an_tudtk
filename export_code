@@ -1,0 +1,32 @@
+import os
+
+# Các thư mục và đuôi file không muốn xuất ra
+IGNORE_DIRS = {'.git', '.venv', 'venv', '__pycache__', 'node_modules', '__MACOSX'}
+IGNORE_EXTS = {'.pyc', '.png', '.jpg', '.pdf', '.zip', '.exe'}
+
+# Tên file xuất ra
+OUTPUT_FILE = "all_code.txt"
+
+with open(OUTPUT_FILE, "w", encoding="utf-8") as outfile:
+    # Quét qua toàn bộ thư mục hiện tại
+    for root, dirs, files in os.walk("."):
+        # Bỏ qua các thư mục không cần thiết
+        dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
+        
+        for file in files:
+            # Bỏ qua các file không phải text hoặc file sinh ra do chạy code
+            if file == OUTPUT_FILE or file == "export_code.py" or any(file.endswith(ext) for ext in IGNORE_EXTS):
+                continue
+                
+            filepath = os.path.join(root, file)
+            try:
+                with open(filepath, "r", encoding="utf-8") as infile:
+                    # Đánh dấu tên file cho AI dễ đọc
+                    outfile.write(f"\n\n{'='*50}\n")
+                    outfile.write(f"FILE: {filepath}\n")
+                    outfile.write(f"{'='*50}\n")
+                    outfile.write(infile.read())
+            except Exception as e:
+                pass # Bỏ qua nếu có file không đọc được dạng text
+
+print(f"Đã gộp thành công vào file {OUTPUT_FILE}!")
