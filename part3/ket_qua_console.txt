@@ -1,0 +1,189 @@
+
+
+
+KÍCH THƯỚC MA TRẬN: 50 x 50
+
+
+
+Test Case 1
+Phân loại : LOẠI 1 - Ma trận chéo trội nghiêm ngặt (SDD)
+1. Gauss (Partial Pivot) : Thời gian = 0.002287s | Sai số = 3.6146e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 0.074371s | Sai số = 2.5367e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.002131s | Sai số = 4.0898e-07 | Số bước = 6
+
+Test Case 2
+Phân loại : LOẠI 1 - Ma trận chéo trội nghiêm ngặt (SDD)
+1. Gauss (Partial Pivot) : Thời gian = 0.002807s | Sai số = 3.3269e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 0.074135s | Sai số = 2.4136e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.001314s | Sai số = 2.0073e-07 | Số bước = 6
+
+Test Case 3
+Phân loại : LOẠI 2 - Ma trận chéo trội kích thước tăng dần
+1. Gauss (Partial Pivot) : Thời gian = 0.002373s | Sai số = 3.4962e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 0.073301s | Sai số = 2.4638e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.001307s | Sai số = 5.3966e-07 | Số bước = 6
+
+Test Case 4
+Phân loại : LOẠI 2 - Ma trận chéo trội kích thước tăng dần
+1. Gauss (Partial Pivot) : Thời gian = 0.002297s | Sai số = 3.6802e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 0.073934s | Sai số = 2.3532e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.001341s | Sai số = 4.6908e-07 | Số bước = 6
+
+Test Case 5
+Phân loại : LOẠI 3 - Ma trận KHÔNG chéo trội (Test không hội tụ)
+1. Gauss (Partial Pivot) : Thời gian = 0.002400s | Sai số = 1.1774e-14 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 0.074149s | Sai số = 5.0286e-01 | Số bước = 1 (Trực tiếp)
+Ma trận không chéo trội — Gauss–Seidel có thể không hội tụ.
+3. Gauss-Seidel          : LỖI (Không hội tụ) - (34, 'Result too large')
+
+
+
+KÍCH THƯỚC MA TRẬN: 100 x 100
+
+
+
+Test Case 1
+Phân loại : LOẠI 1 - Ma trận chéo trội nghiêm ngặt (SDD)
+1. Gauss (Partial Pivot) : Thời gian = 0.018721s | Sai số = 5.6501e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 0.325535s | Sai số = 7.5630e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.004694s | Sai số = 4.2302e-08 | Số bước = 6
+
+Test Case 2
+Phân loại : LOẠI 1 - Ma trận chéo trội nghiêm ngặt (SDD)
+1. Gauss (Partial Pivot) : Thời gian = 0.020484s | Sai số = 5.0745e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 0.334965s | Sai số = 8.2833e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.006923s | Sai số = 3.7504e-08 | Số bước = 6
+
+Test Case 3
+Phân loại : LOẠI 2 - Ma trận chéo trội kích thước tăng dần
+1. Gauss (Partial Pivot) : Thời gian = 0.025025s | Sai số = 4.6527e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 0.343939s | Sai số = 7.9227e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.004113s | Sai số = 1.0929e-06 | Số bước = 5
+
+Test Case 4
+Phân loại : LOẠI 2 - Ma trận chéo trội kích thước tăng dần
+1. Gauss (Partial Pivot) : Thời gian = 0.022974s | Sai số = 6.0480e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 0.332320s | Sai số = 8.2009e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.003906s | Sai số = 6.6974e-07 | Số bước = 5
+
+Test Case 5
+Phân loại : LOẠI 3 - Ma trận KHÔNG chéo trội (Test không hội tụ)
+1. Gauss (Partial Pivot) : Thời gian = 0.017710s | Sai số = 1.0477e-14 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 0.324467s | Sai số = 6.5199e-01 | Số bước = 1 (Trực tiếp)
+Ma trận không chéo trội — Gauss–Seidel có thể không hội tụ.
+3. Gauss-Seidel          : LỖI (Không hội tụ) - (34, 'Result too large')
+
+
+
+KÍCH THƯỚC MA TRẬN: 200 x 200
+
+
+
+Test Case 1
+Phân loại : LOẠI 1 - Ma trận chéo trội nghiêm ngặt (SDD)
+1. Gauss (Partial Pivot) : Thời gian = 0.133089s | Sai số = 7.4276e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 1.777068s | Sai số = 8.9922e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.019227s | Sai số = 1.4892e-07 | Số bước = 5
+
+Test Case 2
+Phân loại : LOẠI 1 - Ma trận chéo trội nghiêm ngặt (SDD)
+1. Gauss (Partial Pivot) : Thời gian = 0.142975s | Sai số = 5.9881e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 1.779030s | Sai số = 8.9871e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.016021s | Sai số = 1.3221e-07 | Số bước = 5
+
+Test Case 3
+Phân loại : LOẠI 2 - Ma trận chéo trội kích thước tăng dần
+1. Gauss (Partial Pivot) : Thời gian = 0.141793s | Sai số = 6.9621e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 1.774146s | Sai số = 1.0120e-01 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.014916s | Sai số = 1.5193e-07 | Số bước = 5
+
+Test Case 4
+Phân loại : LOẠI 2 - Ma trận chéo trội kích thước tăng dần
+1. Gauss (Partial Pivot) : Thời gian = 0.143774s | Sai số = 6.7812e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 1.804711s | Sai số = 9.7620e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.017175s | Sai số = 1.4650e-07 | Số bước = 5
+
+Test Case 5
+Phân loại : LOẠI 3 - Ma trận KHÔNG chéo trội (Test không hội tụ)
+1. Gauss (Partial Pivot) : Thời gian = 0.149208s | Sai số = 1.7767e-14 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 2.087767s | Sai số = 8.4841e-01 | Số bước = 1 (Trực tiếp)
+Ma trận không chéo trội — Gauss–Seidel có thể không hội tụ.
+3. Gauss-Seidel          : LỖI (Không hội tụ) - (34, 'Result too large')
+
+
+
+KÍCH THƯỚC MA TRẬN: 500 x 500
+
+
+
+Test Case 1
+Phân loại : LOẠI 1 - Ma trận chéo trội nghiêm ngặt (SDD)
+1. Gauss (Partial Pivot) : Thời gian = 2.448930s | Sai số = 1.0926e-15 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 28.261416s | Sai số = 7.3651e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.161838s | Sai số = 1.6516e-08 | Số bước = 5
+
+Test Case 2
+Phân loại : LOẠI 1 - Ma trận chéo trội nghiêm ngặt (SDD)
+1. Gauss (Partial Pivot) : Thời gian = 2.734751s | Sai số = 1.2470e-15 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 34.362571s | Sai số = 6.8650e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.196930s | Sai số = 1.3666e-08 | Số bước = 5
+
+Test Case 3
+Phân loại : LOẠI 2 - Ma trận chéo trội kích thước tăng dần
+1. Gauss (Partial Pivot) : Thời gian = 5.309911s | Sai số = 9.8603e-16 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 36.878558s | Sai số = 7.4038e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.136045s | Sai số = 5.8796e-07 | Số bước = 4
+
+Test Case 4
+Phân loại : LOẠI 2 - Ma trận chéo trội kích thước tăng dần
+1. Gauss (Partial Pivot) : Thời gian = 3.203803s | Sai số = 1.0396e-15 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 33.793603s | Sai số = 7.1353e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.167579s | Sai số = 6.2000e-07 | Số bước = 4
+
+Test Case 5
+Phân loại : LOẠI 3 - Ma trận KHÔNG chéo trội (Test không hội tụ)
+1. Gauss (Partial Pivot) : Thời gian = 4.775281s | Sai số = 5.2182e-14 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 34.813937s | Sai số = 8.8472e-01 | Số bước = 1 (Trực tiếp)
+Ma trận không chéo trội — Gauss–Seidel có thể không hội tụ.
+3. Gauss-Seidel          : LỖI (Không hội tụ) - (34, 'Result too large')
+
+
+
+KÍCH THƯỚC MA TRẬN: 1000 x 1000
+
+
+
+Test Case 1
+Phân loại : LOẠI 1 - Ma trận chéo trội nghiêm ngặt (SDD)
+1. Gauss (Partial Pivot) : Thời gian = 24.944853s | Sai số = 1.7010e-15 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 247.108616s | Sai số = 4.8831e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.584121s | Sai số = 1.5685e-07 | Số bước = 4
+
+Test Case 2
+Phân loại : LOẠI 1 - Ma trận chéo trội nghiêm ngặt (SDD)
+1. Gauss (Partial Pivot) : Thời gian = 30.119585s | Sai số = 1.5825e-15 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 267.326161s | Sai số = 5.1381e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.607392s | Sai số = 1.6467e-07 | Số bước = 4
+
+Test Case 3
+Phân loại : LOẠI 2 - Ma trận chéo trội kích thước tăng dần
+1. Gauss (Partial Pivot) : Thời gian = 30.371176s | Sai số = 1.5375e-15 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 296.801444s | Sai số = 4.9228e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.548327s | Sai số = 1.7689e-07 | Số bước = 4
+
+Test Case 4
+Phân loại : LOẠI 2 - Ma trận chéo trội kích thước tăng dần
+1. Gauss (Partial Pivot) : Thời gian = 30.429257s | Sai số = 1.4533e-15 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 311.194651s | Sai số = 5.1274e-02 | Số bước = 1 (Trực tiếp)
+3. Gauss-Seidel          : Thời gian = 0.564364s | Sai số = 1.5685e-07 | Số bước = 4
+
+Test Case 5
+Phân loại : LOẠI 3 - Ma trận KHÔNG chéo trội (Test không hội tụ)
+1. Gauss (Partial Pivot) : Thời gian = 30.264613s | Sai số = 2.5658e-14 | Số bước = 1 (Trực tiếp)
+2. SVD                   : Thời gian = 301.815966s | Sai số = 8.0879e-01 | Số bước = 1 (Trực tiếp)
+Ma trận không chéo trội — Gauss–Seidel có thể không hội tụ.
+3. Gauss-Seidel          : LỖI (Không hội tụ) - (34, 'Result too large')
+Đã lưu thành công dữ liệu vào file: ket_qua_kiem_thu.xlsx
+
+--- ĐANG TIẾN HÀNH VẼ BIỂU ĐỒ ---
+--- HOÀN TẤT VẼ BIỂU ĐỒ ---

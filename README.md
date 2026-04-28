@@ -1,57 +1,97 @@
-# do_an_tudtk
+# Đồ Án Toán Ứng Dụng và Thống Kê 
 
+## 📌 Tổng quan dự án
+Đồ án tập trung vào các việc sau đây:
 
++ Nghiên cứu và cài đặt các phương pháp giải hệ phương trình tuyến tính $Ax = b$, tìm ma trận nghịch đảo, hạng, cơ sở nghiệm, dòng , cột
++ Cài đặt quá trình phân rã và chéo hoá bằng phương pháp SVD, đồng thời trực quan hoá sự phân rã và chéo hoá ma trận
++ Vẽ biểu đồ, phân tích, so sánh các phương pháp khử dựa trên thời gian, sai số, số bước. Phân tích ổn định số giữa 2 loại ma trận Hilbert và SPD
 
-
-
-
-# Hàm `rank_and_basis` - Tìm Hạng và Cơ sở Không gian Ma trận-----------------------------------------------------------------------------------
-
-## Mô tả
-Hàm `rank_and_basis` thực hiện phân tích một ma trận để tìm ra **Hạng** và các vector cơ sở cho 3 không gian cốt lõi trong Đại số tuyến tính:
-- **Không gian Dòng (Row Space)**
-- **Không gian Cột (Column Space)**
-- **Không gian Nghiệm (Null Space / Kernel)**
-
-**Thuật toán sử dụng:** 
-- Hàm gọi phương pháp **Khử Gauss (Gaussian Elimination)** để đưa ma trận về dạng bậc thang (Row Echelon Form - REF).
-- Sử dụng phương pháp **Thế ngược (Back-substitution)** để giải hệ phương trình thuần nhất Ax = 0 nhằm tìm ra không gian nghiệm.
-- Có xử lý sai số số thập phân (Floating-point error) bằng hằng số `Zero` để đảm bảo độ chính xác khi xác định các phần tử Pivot.
+* **Trường:** Đại học Khoa học Tự nhiên - ĐHQG TP.HCM (HCMUS)
+* **Học phần:** Toán ứng dụng và thống kê 
+* **Lớp:** 24CTT5
+* **Ngôn ngữ:** Python 3.10+
+* **Công cụ hỗ trợ:** LaTeX, Jupyter Notebook, Manim.
 
 ---
 
-## Tham số đầu vào (Parameters)
-- `A` *(list of lists, tùy chọn)*: Ma trận đầu vào cần tính toán. 
-- *Lưu ý:* Nếu không truyền `A` (hoặc `A=None`), hàm sẽ tự động lấy thuộc tính `self.A` của đối tượng (được gọi như một phương thức của class).
+## Sinh viên thực hiện
+| MSSV     | Họ và Tên              | 
+| :---     | :---                   | 
+| 24120075 | Trần Nguyễn Anh Khoa   | 
+| 24120048 | Lê Hoàng Hiếu          | 
+| 24120131 | Nguyễn Anh Sang        | 
+| 24120061 | Lê Nguyễn Gia Huy      | 
+| 24120097 | Nguyễn Hoàng Nam       | 
+
 
 ---
 
-## Kết quả trả về (Returns)
-Hàm trả về một `tuple` gồm 4 giá trị theo đúng thứ tự:
-1. `rank` *(int)*: Hạng của ma trận (tương ứng với số lượng cột Pivot).
-2. `col_basis` *(list)*: Danh sách các vector cột tạo thành cơ sở của không gian cột (được trích xuất trực tiếp từ ma trận gốc A).
-3. `row_basis` *(list)*: Danh sách các vector dòng tạo thành cơ sở của không gian dòng (được trích xuất từ ma trận bậc thang).
-4. `null_basis` *(list)*: Danh sách các vector tạo thành cơ sở của không gian nghiệm. Nếu ma trận chỉ có nghiệm tầm thường, danh sách này sẽ rỗng.
+## Cấu trúc đồ án
+
+### Phần 1: Phương pháp giải trực tiếp
+* **Khử Gauss (Gaussian Elimination):** Cài đặt thuật toán khử Gauss với kỹ thuật chọn phần tử trụ (Partial Pivoting) để tối ưu hóa độ chính xác và tránh lỗi chia cho 0.
+* **Thế ngược (Back Substitution):** Giải hệ phương trình sau khi ma trận đã được đưa về dạng tam giác trên.
+* **Lớp Matrix:** Xây dựng cấu trúc dữ liệu ma trận tùy chỉnh để quản lý các phép toán cơ bản mà không phụ thuộc quá nhiều vào thư viện ngoài.
+
+### Phần 2: Phân rã giá trị đơn lẻ (SVD)
+* **Thuật toán Jacobi:** Cài đặt phương pháp xoay Jacobi để tìm trị riêng và vector riêng cho ma trận đối xứng.
+* **Phân rã SVD:** Cài đặt thủ công quá trình phân rã $A = U\Sigma V^T$.
+* **Ứng dụng:** Tính toán các trị suy biến (singular values) để xác định hạng (rank) của ma trận.
+
+### Phần 3: Phương pháp lặp & Tính ổn định số
+* **Gauss-Seidel:** Cài đặt phương pháp lặp để giải hệ phương trình, ưu tiên cho các ma trận chéo trội hoặc ma trận SPD.
+* **Phân tích ổn định:**
+    * Sử dụng SVD để tính **Số điều kiện (Condition Number)** $\kappa(A) = \sigma_{max}/\sigma_{min}$.
+    * So sánh ma trận **Hilbert** (thiếu ổn định) và ma trận **SPD** (ổn định tốt).
+* **Thực nghiệm (Benchmarking):** Đánh giá thời gian chạy và sai số giữa các phương pháp: Gauss, SVD, và Gauss-Seidel.
 
 ---
 
-## Ví dụ sử dụng
+## Cấu trúc thư mục 
 
-```python
-import matrix as mt
+.
+├── reports/
+│   ├── images/                 # Folder chứa hình ảnh cho reports
+│   ├── reports.pdf             # File report PDF
+|   └── reports.tex             # File report viết bằng Latex
+├── part1/
+│   ├── matrix.py               # Định nghĩa lớp Matrix
+│   ├── gaussian_eliminate.py   # Thuật toán khử Gauss
+│   ├── back_substitution.py    # Hàm giải phương trình
+│   ├── inverse.py              # Tìm ma trận nghịch đảo
+│   ├── determinant.py          # Tìm định thức ma trận
+│   ├── rank_and_basis.py       # tìm hạng và cơ sở nghiệm, dòng, cột
+│   ├── part1_demo.ipynb        # File Jupyter Notebook kiểm thử hàm
+│   ├── text_results.txt        # tìm hạng và cơ sở nghiệm, dòng, cột
+│   └── verify_solution.py      # File Python kiểm thử hàm
+├── part2/
+│   ├── decomposition.py        # Thuật toán phân rã SVD
+│   ├── diagonalization.py      # Thuật toán chéo hoá ma trận, áp dụng SVD
+│   ├── SVD.py                  # File Manim viết bằng Python
+│   ├── Manim_demo.mp4          # File video demo Manim trực quan hoá
+│   ├── part2_demo.ipynb        # File Jupyter Notebook kiểm thử hàm
+│   └── Rose_BlackPink.jpg      # File ảnh dùng để ứng dụng nén ảnh bằng SVD
+├── part3/
+│   ├── solvers.py              # Các phương pháp giải hệ phương trình Ax = b
+│   ├── benchmark.py            # Đo đạc thời gian chạy, sai số, số bước
+│   ├── analysis.ipynb          # Phân tích ổn định số bằng đồ thị
+│   ├── bieudo1.jpg             # Biểu đồ thời gian chạy Partial và Seidel
+│   ├── bieudo2.jpg             # Đồ thị log-log
+│   ├── bieudo3.jpg             # Độ hội tụ của Gauss Seidel
+│   ├── remark.ipynb            # File Notebook suy luận kết quả từ phân tích
+│   ├── ket_qua_console.txt     # Kết quả đo đạc in ra console, lưu vào txt
+│   └── ket_qua_kiem_thu.xlsx   # File Excel lưu trữ kết quả đo đạc
+|
+├── requirements.txt    # File requirements chứa các thư viện cần thiết
+└── README.md           # Markdown chứa tổng quan và hướng dẫn cài thư viện
 
-# 1. Khởi tạo ma trận A
-A = [
-    [1, 2, 4],
-    [2, 3, 1],
-    [3, 1, 2]
-]
-# Giả sử hàm rank_and_basis được tích hợp trong class Matrix
-my_matrix = mt.Matrix(A)
-# 2. Gọi hàm thực thi
-rank, col_b, row_b, null_b = my_matrix.rank_and_basis()
-# 3. In kết quả
-print(f"Hạng của ma trận (Rank): {rank}")
-print(f"Cơ sở Không gian Cột: {col_b}")
-print(f"Cơ sở Không gian Dòng: {row_b}")
-print(f"Cơ sở Không gian Nghiệm: {null_b}")
+## Hướng dẫn cài đặt
+
+### 1. Yêu cầu hệ thống
+* Python 3.10 trở lên.
+* Trình quản lý gói `pip`.
+
+### 2. Cài đặt thư viện phụ thuộc
+Tất cả các thư viện cần thiết cho đồ án đều được lưu trữ trong file requirements.txt, mở terminal và chạy lệnh sau
++ pip install -r requirements.txt
