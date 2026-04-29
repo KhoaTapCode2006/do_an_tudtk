@@ -53,7 +53,7 @@
 * **Phân tích ổn định:**
     * Sử dụng SVD để tính **Số điều kiện (Condition Number)** $\kappa(A) = \sigma_{max}/\sigma_{min}$.
     * So sánh ma trận **Hilbert** (thiếu ổn định) và ma trận **SPD** (ổn định tốt).
-* **Kết luân:** Suy luận và đưa ra kết luận về ưu và nhược điểm của các loại phương pháp khử dựa trên số liệu đã phân tích, nhận xét khi nào nên dùng phương pháp khử nào.
+* **Kết luận:** Suy luận và đưa ra kết luận về ưu và nhược điểm của các loại phương pháp khử dựa trên số liệu đã phân tích, nhận xét khi nào nên dùng phương pháp khử nào.
 
 ---
 
