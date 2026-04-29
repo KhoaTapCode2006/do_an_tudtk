@@ -3,9 +3,9 @@
 ## 📌 Tổng quan dự án
 Đồ án tập trung vào các việc sau đây:
 
-+ Nghiên cứu và cài đặt các phương pháp giải hệ phương trình tuyến tính $Ax = b$, tìm ma trận nghịch đảo, hạng, cơ sở nghiệm, dòng , cột
-+ Cài đặt quá trình phân rã và chéo hoá bằng phương pháp SVD, đồng thời trực quan hoá sự phân rã và chéo hoá ma trận
-+ Vẽ biểu đồ, phân tích, so sánh các phương pháp khử dựa trên thời gian, sai số, số bước. Phân tích ổn định số giữa 2 loại ma trận Hilbert và SPD
++ Nghiên cứu và cài đặt các phương pháp giải hệ phương trình tuyến tính $Ax = b$, tìm ma trận nghịch đảo, hạng, cơ sở nghiệm, dòng , cột.
++ Cài đặt quá trình phân rã và chéo hoá bằng phương pháp SVD, đồng thời trực quan hoá sự phân rã và chéo hoá ma trận.
++ Vẽ biểu đồ, phân tích, so sánh các phương pháp khử dựa trên thời gian, sai số, số bước. Phân tích ổn định số giữa 2 loại ma trận Hilbert và SPD.
 
 * **Trường:** Đại học Khoa học Tự nhiên - ĐHQG TP.HCM (HCMUS)
 * **Học phần:** Toán ứng dụng và thống kê 
@@ -27,29 +27,35 @@
 
 ---
 
-## Cấu trúc đồ án
+## Tổng quan các phần của đồ án
 
 ### Phần 1: Phương pháp giải trực tiếp
-* **Khử Gauss (Gaussian Elimination):** Cài đặt thuật toán khử Gauss với kỹ thuật chọn phần tử trụ (Partial Pivoting) để tối ưu hóa độ chính xác và tránh lỗi chia cho 0.
-* **Thế ngược (Back Substitution):** Giải hệ phương trình sau khi ma trận đã được đưa về dạng tam giác trên.
 * **Lớp Matrix:** Xây dựng cấu trúc dữ liệu ma trận tùy chỉnh để quản lý các phép toán cơ bản mà không phụ thuộc quá nhiều vào thư viện ngoài.
+* **Khử Gauss:** Cài đặt thuật toán khử Gauss với kỹ thuật chọn phần tử trụ (Partial Pivoting) để tối ưu hóa độ chính xác và tránh lỗi chia cho 0.
+* **Thế ngược:** Giải hệ phương trình sau khi ma trận đã được đưa về dạng tam giác trên.
+* **Nghịch đảo:** Tìm ma trận nghịch đảo. 
+* **Định thức:** Tính định thức của ma trận.
+* **Tìm hạng và cơ sở:** Tìm hạng và cơ sở của dòng, cột, nghiệm của ma trận.
+* **Kiểm thử:** Kiểm thử sự đúng đắn của các hàm thủ công bằng Numpy.
 
 ### Phần 2: Phân rã giá trị đơn lẻ (SVD)
 * **Thuật toán Jacobi:** Cài đặt phương pháp xoay Jacobi để tìm trị riêng và vector riêng cho ma trận đối xứng.
 * **Phân rã SVD:** Cài đặt thủ công quá trình phân rã $A = U\Sigma V^T$.
-* **Ứng dụng:** Tính toán các trị suy biến (singular values) để xác định hạng (rank) của ma trận.
+* **Chéo hoá:** Chéo hoá ma trận bằng cách áp dụng thuật toán phân rã SVD.
+* **Video Manim:** Trực quan hoá quá trình phân rã và chéo hoá bằng Manim, ứng dụng SVD để nén ảnh.
 
 ### Phần 3: Phương pháp lặp & Tính ổn định số
 * **Gauss-Seidel:** Cài đặt phương pháp lặp để giải hệ phương trình, ưu tiên cho các ma trận chéo trội hoặc ma trận SPD.
+* **Thực nghiệm:** Đánh giá thời gian chạy, sai số và bước nhảy giữa các phương pháp: Gauss Partial Pivoting, SVD, và Gauss-Seidel.
 * **Phân tích ổn định:**
     * Sử dụng SVD để tính **Số điều kiện (Condition Number)** $\kappa(A) = \sigma_{max}/\sigma_{min}$.
     * So sánh ma trận **Hilbert** (thiếu ổn định) và ma trận **SPD** (ổn định tốt).
-* **Thực nghiệm (Benchmarking):** Đánh giá thời gian chạy và sai số giữa các phương pháp: Gauss, SVD, và Gauss-Seidel.
+* **Kết luân:** Suy luận và đưa ra kết luận về ưu và nhược điểm của các loại phương pháp khử dựa trên số liệu đã phân tích, nhận xét khi nào nên dùng phương pháp khử nào.
 
 ---
 
 ## Cấu trúc thư mục 
-
+```text
 .
 ├── reports/
 │   ├── images/                 # Folder chứa hình ảnh cho reports
@@ -85,6 +91,7 @@
 |
 ├── requirements.txt    # File requirements chứa các thư viện cần thiết
 └── README.md           # Markdown chứa tổng quan và hướng dẫn cài thư viện
+```
 
 ## Hướng dẫn cài đặt
 
