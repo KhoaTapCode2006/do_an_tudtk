@@ -12,7 +12,10 @@
 * **Lớp:** 24CTT5
 * **Ngôn ngữ:** Python 3.10+
 * **Công cụ hỗ trợ:** LaTeX, Jupyter Notebook, Manim.
-
+* **Giảng viên thực hành:**
+    * ThS. Võ Nam Thục Đoan
+    * ThS. Lê Nhựt Nam
+    
 ---
 
 ## Sinh viên thực hiện
