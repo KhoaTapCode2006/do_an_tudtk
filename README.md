@@ -9,7 +9,7 @@
 
 * **Trường:** Đại học Khoa học Tự nhiên - ĐHQG TP.HCM (HCMUS)
 * **Học phần:** Toán ứng dụng và thống kê 
-* **Lớp:** 24CTT5
+* **Lớp:** 24CTT2
 * **Ngôn ngữ:** Python 3.10+
 * **Công cụ hỗ trợ:** LaTeX, Jupyter Notebook, Manim.
 * **Giảng viên thực hành:**
