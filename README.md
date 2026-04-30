@@ -61,9 +61,7 @@
 ```text
 .
 ├── reports/
-│   ├── images/                 # Folder chứa hình ảnh cho reports
-│   ├── reports.pdf             # File report PDF
-|   └── reports.tex             # File report viết bằng Latex
+│   └── reports.pdf             # File report PDF
 ├── part1/
 │   ├── matrix.py               # Định nghĩa lớp Matrix
 │   ├── gaussian_eliminate.py   # Thuật toán khử Gauss
@@ -78,7 +76,7 @@
 │   ├── decomposition.py        # Thuật toán phân rã SVD
 │   ├── diagonalization.py      # Thuật toán chéo hoá ma trận, áp dụng SVD
 │   ├── SVD.py                  # File Manim viết bằng Python
-│   ├── Manim_demo.mp4          # File video demo Manim trực quan hoá
+│   ├── Manim_demo_link.txt     # File chứa link youtube video demo Manim trực quan hoá 
 │   ├── part2_demo.ipynb        # File Jupyter Notebook kiểm thử hàm
 │   └── Rose_BlackPink.jpg      # File ảnh dùng để ứng dụng nén ảnh bằng SVD
 ├── part3/
